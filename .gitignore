@@ -1,0 +1,48 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+env/
+venv/
+.env/
+
+# Distribution files
+build/
+dist/
+*.egg-info/
+
+# IDE files
+.vscode/
+.idea/
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Log files
+logs/
+*.log
+
+# Data files
+data/train.csv
+data/test.csv
+data/processed_data/
+
+# Model files
+models/
+*.h5
+*.pkl
+
+# MacOS system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
+
+# Temporary files
+*.swp
+*.bak
+
+# Secrets and configuration files
+.env
+config.json
