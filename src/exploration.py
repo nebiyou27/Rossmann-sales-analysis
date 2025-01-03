@@ -13,29 +13,54 @@ def explore_data(df):
     """
     logger.info("Starting exploratory data analysis...")
 
-    # Visualize sales distribution
-    plt.figure(figsize=(10, 6))
-    sns.histplot(df['Sales'], bins=50)
-    plt.title('Sales Distribution')
-    plt.xlabel('Sales')
-    plt.ylabel('Frequency')
-    plt.show()
-    logger.info("Visualized sales distribution.")
+    try:
+        # Visualize sales distribution
+        plt.figure(figsize=(10, 6))
+        sns.histplot(df['Sales'], bins=50, kde=True, color='blue')
+        plt.title('Sales Distribution')
+        plt.xlabel('Sales')
+        plt.ylabel('Frequency')
+        plt.show()
+        logger.info("Visualized sales distribution.")
 
-    # Explore sales trends over time
-    plt.figure(figsize=(12, 6))
-    sns.lineplot(x='Date', y='Sales', data=df)
-    plt.title('Sales Trend Over Time')
-    plt.xlabel('Date')
-    plt.ylabel('Sales')
-    plt.show()
-    logger.info("Visualized sales trend over time.")
+        # Explore sales trends over time
+        plt.figure(figsize=(12, 6))
+        sns.lineplot(x='Date', y='Sales', data=df, ci=None)
+        plt.title('Sales Trend Over Time')
+        plt.xlabel('Date')
+        plt.ylabel('Sales')
+        plt.xticks(rotation=45)
+        plt.show()
+        logger.info("Visualized sales trend over time.")
 
-    # ... Add more exploration functions as needed ...
+        # Additional exploratory plots
+        plt.figure(figsize=(10, 6))
+        sns.boxplot(x='DayOfWeek', y='Sales', data=df)
+        plt.title('Sales by Day of the Week')
+        plt.xlabel('Day of the Week')
+        plt.ylabel('Sales')
+        plt.show()
+        logger.info("Visualized sales by day of the week.")
+
+    except KeyError as e:
+        logger.error(f"KeyError during exploration: {e}")
+    except Exception as e:
+        logger.error("Error during exploratory data analysis", exc_info=True)
 
 if __name__ == "__main__":
-    data_path = "C:\\Users\\neba\\Rossmann-sales-analysis\\data\\test.csv" 
-    df = pd.read_csv(data_path) 
-    df_cleaned = clean_data(df) 
+    try:
+        data_path = "C:\\Users\\neba\\Rossmann-sales-analysis\\data\\merged_data.csv" 
+        df = pd.read_csv(data_path) 
+        logger.info("Loaded data successfully.")
 
-    explore_data(df_cleaned)
+        # Clean the data
+        df_cleaned = clean_data(df)
+        logger.info("Data cleaning completed.")
+
+        # Perform exploratory analysis
+        explore_data(df_cleaned)
+
+    except FileNotFoundError as e:
+        logger.error(f"File not found: {e}")
+    except Exception as e:
+        logger.error("Error in the main execution block", exc_info=True)

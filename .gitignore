@@ -26,7 +26,7 @@ logs/
 # Data files
 data/train.csv
 data/test.csv
-data/processed_data/
+data/merged_data/
 
 # Model files
 models/
